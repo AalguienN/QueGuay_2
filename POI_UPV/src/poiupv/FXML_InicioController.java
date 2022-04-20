@@ -181,6 +181,9 @@ public class FXML_InicioController implements Initializable {
         equalPasswords.setValue(Boolean.FALSE);
     }
          
+    public boolean isResizable(){
+        return false;
+    }
 
         
 
