@@ -65,7 +65,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <HBox fx:id="id_ErrorCorreo" alignment="CENTER_LEFT">
+            <HBox alignment="CENTER_LEFT">
                <children>
                   <Label text="Nombre:" textFill="#025477">
                      <HBox.margin>
@@ -73,7 +73,7 @@
                      </HBox.margin></Label>
                   <VBox>
                      <children>
-                        <TextField fx:id="id_nombre" minWidth="350.0">
+                        <TextField fx:id="id_nombre" alignment="CENTER" minWidth="350.0">
                            <VBox.margin>
                               <Insets left="10.0" />
                            </VBox.margin></TextField>
@@ -96,11 +96,11 @@
                      </HBox.margin></Label>
                   <VBox>
                      <children>
-                        <TextField fx:id="id_correo" minWidth="350.0" promptText="yourEmail@domain.com">
+                        <TextField fx:id="id_correo" alignment="CENTER" minWidth="350.0" promptText="yourEmail@domain.com">
                            <VBox.margin>
                               <Insets left="10.0" />
                            </VBox.margin></TextField>
-                        <Label fx:id="id_incorrectEmail1" textFill="#ca0505" visible="false" />
+                        <Label fx:id="id_ErrorCorreo" textFill="#ca0505" visible="false" />
                      </children>
                   </VBox>
                </children>
@@ -112,7 +112,7 @@
                <children>
                   <VBox alignment="CENTER">
                      <children>
-                        <HBox fx:id="id_ErrorCorreo1" alignment="CENTER_LEFT">
+                        <HBox alignment="CENTER_LEFT">
                            <children>
                               <Label prefHeight="18.0" prefWidth="90.0" text="Contraseña:" textFill="#025477">
                                  <HBox.margin>
@@ -126,7 +126,7 @@
                                           <Insets left="10.0" />
                                        </VBox.margin>
                                     </PasswordField>
-                                    <Label fx:id="id_ErrorName1" textFill="#ca0505" visible="false" />
+                                    <Label fx:id="id_ErrorContraValido" textFill="#ca0505" visible="false" />
                                  </children>
                                  <HBox.margin>
                                     <Insets left="20.0" />
@@ -140,7 +140,7 @@
                               <Insets />
                            </VBox.margin>
                         </HBox>
-                        <HBox fx:id="id_ErrorCorreo11" alignment="CENTER_LEFT">
+                        <HBox alignment="CENTER_LEFT">
                            <children>
                               <Label prefHeight="18.0" prefWidth="174.0" text="Repetir contraseña:" textFill="#025477">
                                  <HBox.margin>
@@ -154,7 +154,7 @@
                                           <Insets left="10.0" />
                                        </VBox.margin>
                                     </PasswordField>
-                                    <Label fx:id="id_ErrorName11" textFill="#ca0505" visible="false" />
+                                    <Label fx:id="id_ErrorContraIgual" textFill="#ca0505" visible="false" />
                                  </children>
                               </VBox>
                            </children>
@@ -169,8 +169,12 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <DatePicker fx:id="id_FechaNacimiento" />
-                              <Label fx:id="id_ErrorFecha" textFill="RED" />
+                              <DatePicker fx:id="id_FechaNacimiento">
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </DatePicker>
+                              <Label fx:id="id_ErrorEdad" textFill="RED" />
                            </children>
                            <VBox.margin>
                               <Insets top="15.0" />
@@ -186,7 +190,7 @@
                               <Image url="@../../../recursos_entrega/avatars/default.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="id_SelecImagen" contentDisplay="BOTTOM" text="Seleccionar imagen..." textAlignment="CENTER" textFill="#1a00ff" underline="true">
+                        <Label fx:id="id_SelecImagen" contentDisplay="BOTTOM" onMousePressed="#handlePressedAction" text="Seleccionar imagen..." textAlignment="CENTER" textFill="#1a00ff" underline="true">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
