@@ -4,7 +4,10 @@
  */
 package poiupv;
 
+import DBAccess.NavegacionDAOException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,11 +27,13 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import model.Navegacion;
 
 /**
  * FXML Controller class
@@ -48,6 +53,8 @@ public class FXMLRegistroController implements Initializable {
     
     //When to strings are equal, compareTo returns zero
     private final int EQUALS = 0;  
+    
+    
     
     
     @FXML
@@ -175,7 +182,7 @@ public class FXMLRegistroController implements Initializable {
     //=========================================================
     // you must initialize here all related with the object 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)  {
         // TODO
         
         validEmail = new SimpleBooleanProperty();
@@ -210,26 +217,24 @@ public class FXMLRegistroController implements Initializable {
 
     @FXML
     private void handleCancelOnAction(ActionEvent event) {
+        
     }
 
     @FXML
     private void handleAcceptOnAction(ActionEvent event) {
+        
     }
 
     @FXML
-    private void handlePressedAction(MouseEvent event) {
+    private void handlePressedAction(MouseEvent event) throws FileNotFoundException{
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Abrir fichero");
-        fileChooser.getExtensionFilters().addAll(
-    new ExtensionFilter("Ficheros de texto", "*.txt"),
-    new ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.gif"),
-    new ExtensionFilter("Sonidos", "*.wav", "*.mp3", "*.aac"),
-    new ExtensionFilter("Todos", "*.*"));
-        //fileChooser.getExtesionFilters().add(new ExtensionFilter("Imágenes", "*.png", "*.jpg"));
+        fileChooser.setTitle("Selecciona imagen de perfil");
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.gif"));
         File selectedFile = fileChooser.showOpenDialog(((Node)event.getSource()).getScene().getWindow());
-   
-        Navegacion navegar = getSingletonNavegacion()
         
+        Image imagen = new Image(new FileInputStream(selectedFile));
+        id_imagen.setImage(imagen);
+         
     }
     
     
