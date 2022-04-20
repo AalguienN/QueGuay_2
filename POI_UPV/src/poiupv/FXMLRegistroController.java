@@ -177,6 +177,7 @@ public class FXMLRegistroController implements Initializable {
             manageCorrect(id_errorLabel, id_contraseña, validPassword);
         }
     }
+    
 
     
     //=========================================================
@@ -208,21 +209,18 @@ public class FXMLRegistroController implements Initializable {
             if(!newValue){checkEquals(); //si se ha perdido el focus
             }});
         
-        
-        id_buttonA.disableProperty().bind(Bindings.not(validFields)); // debe pasar a la ventana de FUNCIONES
-     
-        id_buttonC.setOnAction( (event)->{id_buttonC.getScene().getWindow().hide();});  //debe volver a la ventana de INICIAR SESION
+        id_buttonA.disableProperty().bind(Bindings.not(validFields));
 
     }    
 
     @FXML
-    private void handleCancelOnAction(ActionEvent event) {
-        
+    private void handleCancelOnAction(ActionEvent event) throws IOException {
+        switchToScene(event, "FXMLDocument"); //sustituir el string por nombre del .fxml de la ventana INICIAR SESION
     }
 
     @FXML
-    private void handleAcceptOnAction(ActionEvent event) {
-        
+    private void handleAcceptOnAction(ActionEvent event) throws IOException {
+        switchToScene(event, "FXMLDocument"); //sustituir el string por nombre del .fxml de la ventana FUNCIONES
     }
 
     @FXML
@@ -233,8 +231,7 @@ public class FXMLRegistroController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(((Node)event.getSource()).getScene().getWindow());
         
         Image imagen = new Image(new FileInputStream(selectedFile));
-        id_imagen.setImage(imagen);
-         
+        id_imagen.setImage(imagen);  
     }
     
     
