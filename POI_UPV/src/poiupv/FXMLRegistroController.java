@@ -219,10 +219,18 @@ public class FXMLRegistroController implements Initializable {
     @FXML
     private void handlePressedAction(MouseEvent event) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("abrir fichero");
-        fileChooser.getExtesionFilters().addAll(new ExtensionFilter("Imágenes", "*.png", "*.jpg"));
+        fileChooser.setTitle("Abrir fichero");
+        fileChooser.getExtensionFilters().addAll(
+    new ExtensionFilter("Ficheros de texto", "*.txt"),
+    new ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.gif"),
+    new ExtensionFilter("Sonidos", "*.wav", "*.mp3", "*.aac"),
+    new ExtensionFilter("Todos", "*.*"));
+        //fileChooser.getExtesionFilters().add(new ExtensionFilter("Imágenes", "*.png", "*.jpg"));
         File selectedFile = fileChooser.showOpenDialog(((Node)event.getSource()).getScene().getWindow());
    
+        Navegacion navegar = getSingletonNavegacion()
+        
     }
+    
     
 }
