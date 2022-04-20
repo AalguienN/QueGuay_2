@@ -50,6 +50,6 @@ public class FXML_PrincipalController implements Initializable {
         try{
             Navegacion navegacion = Navegacion.getSingletonNavegacion();
         } catch(NavegacionDAOException e){}
-    }    
+    }
     
 }
