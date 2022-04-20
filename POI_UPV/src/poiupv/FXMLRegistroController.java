@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -178,6 +179,19 @@ public class FXMLRegistroController implements Initializable {
         }
     }
     
+    private void checkAge() {
+        LocalDate fecha = id_FechaNacimiento.getValue();
+        LocalDate actual = LocalDate.now();
+        if((actual.getYear() - a.getYear()) < 18) {
+            manageError(id_ErrorEdad, id_FechaNacimiento, validAge);
+        } else {
+            manageCorrect()
+        }
+        
+        
+        
+        a.show();
+    }
 
     
     //=========================================================
@@ -206,6 +220,9 @@ public class FXMLRegistroController implements Initializable {
             if(!newValue){checkEditPassword(); //si se ha perdido el focus
             }});
         id_contraseña1.focusedProperty().addListener((observable, oldValue, newValue)-> {
+            if(!newValue){checkEquals(); //si se ha perdido el focus
+            }});
+        id_nombre.focusedProperty().addListener((observable, oldValue, newValue)-> {
             if(!newValue){checkEquals(); //si se ha perdido el focus
             }});
         
