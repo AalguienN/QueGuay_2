@@ -82,7 +82,7 @@ public class FXMLInicioController implements Initializable{
     
         private void irARegistro() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLRegistro.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setTitle("Registro");
@@ -107,7 +107,7 @@ public class FXMLInicioController implements Initializable{
             id_contraseña.textProperty().getValueSafe());
                 if(user == null){
                         id_contraseñaIncorrecta.visibleProperty().set(true); 
-                }else{
+                }else{ //si todo está bien, te envía al principal
                     irAPrincipal();
                 }
         }
@@ -117,13 +117,15 @@ public class FXMLInicioController implements Initializable{
     private void cancelar(ActionEvent event) {
         id_cancelar.getScene().getWindow().hide();
     }   
-
-    void initStage(Stage stage) {
-        primaryStage = stage;
-    }
-
+    
     @FXML
     private void registrase(ActionEvent event) {
         irARegistro();
     }
+    
+    void initStage(Stage stage) {
+        primaryStage = stage;
+    }
+
+
 }
