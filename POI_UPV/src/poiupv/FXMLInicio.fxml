@@ -15,7 +15,7 @@
 
 <BorderPane maxHeight="420.0" maxWidth="400.0" minHeight="420.0" minWidth="400.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="400.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.FXMLInicioController">
    <center>
-      <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER_LEFT" prefWidth="380.0" BorderPane.alignment="TOP_CENTER">
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -43,7 +43,7 @@
                   </VBox>
                </children>
                <VBox.margin>
-                  <Insets top="50.0" />
+                  <Insets top="30.0" />
                </VBox.margin>
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
@@ -85,7 +85,7 @@
                         <Insets left="80.0" right="30.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="id_Cancelar" contentDisplay="CENTER" minWidth="120.0" mnemonicParsing="false" onAction="#cancelar" style="-fx-background-color: yellowgreen;" text="Cancelar" textAlignment="RIGHT" textFill="WHITE">
+                  <Button fx:id="id_cancelar" contentDisplay="CENTER" minWidth="120.0" mnemonicParsing="false" onAction="#cancelar" style="-fx-background-color: yellowgreen;" text="Cancelar" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -105,7 +105,7 @@
       </VBox>
    </center>
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: olivedrab;" BorderPane.alignment="CENTER_LEFT">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: olivedrab;" BorderPane.alignment="CENTER_LEFT">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGO!">
                <HBox.margin>

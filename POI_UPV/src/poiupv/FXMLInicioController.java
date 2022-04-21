@@ -5,6 +5,7 @@
 package poiupv;
 
 import DBAccess.NavegacionDAOException;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -12,11 +13,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import model.Navegacion;
 import model.User;
 
@@ -31,8 +36,6 @@ public class FXMLInicioController implements Initializable{
     private TextField id_usuario;
     @FXML
     private PasswordField id_contraseña;
-
-    private Navegacion datos;
     @FXML
     private Button id_iniciarSesion;
     @FXML
@@ -40,7 +43,11 @@ public class FXMLInicioController implements Initializable{
     @FXML
     private Label id_contraseñaIncorrecta;
     @FXML
-    private Button id_Cancelar;
+    private Button id_cancelar;
+    
+    private Navegacion datos; //creacion del Map
+    private Stage primaryStage;
+    
     /**
      * Initializes the controller class.
      */
@@ -57,32 +64,45 @@ public class FXMLInicioController implements Initializable{
             Logger.getLogger(FXMLInicioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    private void irAPrincipal() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setTitle("Principal");
+            primaryStage.setScene(scene);
+            FXMLInicioController inicio = loader.getController();
+            inicio.initStage(primaryStage);
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLInicioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     @FXML
     private void iniciarSesion(ActionEvent event) {
-        id_usuarioIncorrecto.visibleProperty().set(false);
-        if(!datos.exitsNickName(id_usuario.textProperty().getValueSafe())){
-           id_usuarioIncorrecto.visibleProperty().set(true);
-        }else{
+        id_usuarioIncorrecto.visibleProperty().set(false); //siempre que le des a iniciar sesión desaparece el mensaje de error
+        id_contraseñaIncorrecta.visibleProperty().set(false); //siempre que le des a iniciar sesión desaparece el mensaje de error
+        if(!datos.exitsNickName(id_usuario.textProperty().getValueSafe())){ //comprueba si no existe el usuario en la base de datos y muestra el mensaje de error
+           id_usuarioIncorrecto.visibleProperty().set(true); 
+        }else{ // comprueba si la contraseña no coincide con el usuario y muestra el mensaje de error
             User user = datos.loginUser(id_usuario.textProperty().getValueSafe(),
             id_contraseña.textProperty().getValueSafe());
                 if(user == null){
-                        id_contraseñaIncorrecta.visibleProperty().set(true);
+                        id_contraseñaIncorrecta.visibleProperty().set(true); 
+                }else{
+                    irAPrincipal();
                 }
         }
     }
 
     @FXML
     private void cancelar(ActionEvent event) {
-        
+        id_cancelar.getScene().getWindow().hide();
+    }   
+
+    void initStage(Stage stage) {
+        primaryStage = stage;
     }
-    
-    
 }
- /*User user = datos.loginUser(id_usuario.textProperty().getValueSafe(),
-            id_contraseña.textProperty().getValueSafe());
-                if(user.checkCredentials(id_usuario.textProperty().getValueSafe(),
-                    id_contraseña.textProperty().getValueSafe())){
-                    
-                }
-*/
