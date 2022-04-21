@@ -80,6 +80,22 @@ public class FXMLInicioController implements Initializable{
         }
     }
     
+        private void irARegistro() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setTitle("Registro");
+            primaryStage.setScene(scene);
+            FXMLInicioController inicio = loader.getController();
+            inicio.initStage(primaryStage);
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLInicioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
     @FXML
     private void iniciarSesion(ActionEvent event) {
         id_usuarioIncorrecto.visibleProperty().set(false); //siempre que le des a iniciar sesión desaparece el mensaje de error
@@ -104,5 +120,10 @@ public class FXMLInicioController implements Initializable{
 
     void initStage(Stage stage) {
         primaryStage = stage;
+    }
+
+    @FXML
+    private void registrase(ActionEvent event) {
+        irARegistro();
     }
 }

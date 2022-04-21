@@ -130,7 +130,7 @@
             <Insets />
          </BorderPane.margin>
          <children>
-            <Hyperlink text="¿No estás registrado? Registrar nueva cuenta" textFill="YELLOWGREEN">
+            <Hyperlink onAction="#registrase" text="¿No estás registrado? Registrar nueva cuenta" textFill="YELLOWGREEN">
                <HBox.margin>
                   <Insets bottom="20.0" right="30.0" />
                </HBox.margin>
