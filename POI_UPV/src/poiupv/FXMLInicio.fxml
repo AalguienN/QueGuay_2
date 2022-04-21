@@ -31,7 +31,7 @@
                               <Insets right="30.0" top="20.0" />
                            </VBox.margin>
                         </TextField>
-                        <Label fx:id="lIncorrectEmail" text="Usuario Inexistente" textFill="#ec2626" visible="false">
+                        <Label fx:id="id_usuarioIncorrecto" text="Usuario Incorrecto" textFill="#ec2626" visible="false">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -60,7 +60,7 @@
                               <Insets right="30.0" top="20.0" />
                            </VBox.margin>
                         </PasswordField>
-                        <Label fx:id="lIncorrectEmail1" text="Contraseña Incorrecta" textFill="#ec2626" visible="false">
+                        <Label fx:id="id_contraseñaIncorrecta" text="Contraseña Incorrecta" textFill="#ec2626" visible="false">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -74,7 +74,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="Cancelar1" contentDisplay="CENTER" minWidth="120.0" mnemonicParsing="false" style="-fx-background-color: yellowgreen;" text="Iniciar Sesión" textAlignment="RIGHT" textFill="WHITE">
+                  <Button fx:id="id_iniciarSesion" contentDisplay="CENTER" minWidth="120.0" mnemonicParsing="false" onAction="#iniciarSesion" style="-fx-background-color: yellowgreen;" text="Iniciar Sesión" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -85,7 +85,7 @@
                         <Insets left="80.0" right="30.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="Cancelar" contentDisplay="CENTER" minWidth="120.0" mnemonicParsing="false" style="-fx-background-color: yellowgreen;" text="Cancelar" textAlignment="RIGHT" textFill="WHITE">
+                  <Button fx:id="id_Cancelar" contentDisplay="CENTER" minWidth="120.0" mnemonicParsing="false" onAction="#cancelar" style="-fx-background-color: yellowgreen;" text="Cancelar" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
