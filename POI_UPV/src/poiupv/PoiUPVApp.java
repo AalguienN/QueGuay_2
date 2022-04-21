@@ -23,6 +23,7 @@ public class PoiUPVApp extends Application {
         
         Scene scene = new Scene(root);
         stage.setTitle("Registro");
+        //stage.setResizable(false); PARA QUE LA PANTALLA NO CAMBIE DE TAMAÑO -> ninguna pantalla se podrá maximizar...
         stage.setScene(scene);
         stage.show();
     }

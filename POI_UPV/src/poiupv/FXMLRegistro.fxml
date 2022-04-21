@@ -169,7 +169,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <DatePicker fx:id="id_FechaNacimiento">
+                              <DatePicker fx:id="id_FechaNacimiento" onAction="#handleDate">
                                  <VBox.margin>
                                     <Insets top="5.0" />
                                  </VBox.margin>

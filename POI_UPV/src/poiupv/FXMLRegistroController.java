@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import static java.lang.Math.abs;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -55,9 +56,6 @@ public class FXMLRegistroController implements Initializable {
     //When to strings are equal, compareTo returns zero
     private final int EQUALS = 0;  
     
-    
-    
-    
     @FXML
     private Label id_errorLabel;
     @FXML
@@ -95,7 +93,7 @@ public class FXMLRegistroController implements Initializable {
     private Scene scene;
     private Parent root;
     
-   
+   //CAMBIAR ESCENA
     public void switchToScene(ActionEvent event, String name) throws IOException {
   
         Parent root = FXMLLoader.load(getClass().getResource(name+".fxml"));
@@ -113,7 +111,6 @@ public class FXMLRegistroController implements Initializable {
     private void manageError(Label errorLabel,TextField textField, BooleanProperty boolProp ){
         boolProp.setValue(Boolean.FALSE);
         showErrorMessage(errorLabel,textField);
-        textField.requestFocus();
  
     }
     /**
@@ -150,22 +147,11 @@ public class FXMLRegistroController implements Initializable {
         errorLabel.visibleProperty().set(false);
         textField.styleProperty().setValue("");
     }
-
-    private void checkEditEmail() {
-        if(!Utils.checkEmail(id_correo.textProperty().getValueSafe())){
-            manageError(id_ErrorCorreo, id_correo, validEmail);
-        } else {
-            manageCorrect(id_ErrorCorreo, id_correo, validEmail);
-        }
-    }
     
     private void checkEquals(){
         if(id_contraseña.textProperty().getValueSafe().compareTo(id_contraseña1.textProperty().getValueSafe()) != EQUALS) {
             showErrorMessage(id_ErrorContraIgual,id_contraseña1);
             equalPasswords.setValue(Boolean.FALSE);
-            id_contraseña.textProperty().setValue("");
-            id_contraseña1.textProperty().setValue("");
-            id_contraseña.requestFocus();
             }else {
                 manageCorrect(id_ErrorContraIgual,id_contraseña1,equalPasswords); 
             }
@@ -173,24 +159,53 @@ public class FXMLRegistroController implements Initializable {
    
     private void checkEditPassword() {
         if(!Utils.checkPassword(id_contraseña.textProperty().getValueSafe())){
-            manageError(id_errorLabel, id_contraseña, validPassword);
+            manageError(id_ErrorContraValido, id_contraseña, validPassword);
+            //abrir ventada de aviso con las condiciones de la contraseña
         } else {
-            manageCorrect(id_errorLabel, id_contraseña, validPassword);
+            manageCorrect(id_ErrorContraValido, id_contraseña, validPassword);
         }
     }
     
+
+    // COMPROBAR CORREO: si el correo ya se encuentra en base de datos error, sino validEmail = TRUE
+    private void checkEditEmail() {
+        
+        
+        if(!Utils.checkEmail(id_correo.textProperty().getValueSafe())){ //condicion comprobar base de datos
+            manageError(id_ErrorCorreo, id_correo, validEmail);
+        } else {
+            manageCorrect(id_ErrorCorreo, id_correo, validEmail);
+        }
+    }
+    
+     // COMPROBAR NOMBRE : si el nombre ya se encuentra en base de datos error (textfield rojo), sino validName = TRUE
+     private void checkEditName() {
+        
+        if(!Utils.checkEmail(id_correo.textProperty().getValueSafe())){ //condicion comprobar base de datos
+            manageError(id_ErrorCorreo, id_correo, validEmail);
+        } else {
+            manageCorrect(id_ErrorCorreo, id_correo, validEmail);
+        }
+    }
+    
+  
+    // COMPROBRA EDAD: si usuario es menor de edad error, sino validAge = TRUE
     private void checkAge() {
         LocalDate fecha = id_FechaNacimiento.getValue();
         LocalDate actual = LocalDate.now();
-        if((actual.getYear() - a.getYear()) < 18) {
-            manageError(id_ErrorEdad, id_FechaNacimiento, validAge);
-        } else {
-            manageCorrect()
-        }
         
+        int años = actual.getYear() - fecha.getYear();
+        int meses = abs(actual.getMonthValue() - fecha.getMonthValue());
+        int dias = abs(actual.getDayOfMonth() - fecha.getDayOfMonth());
+ 
+        if(años >= 18) {
+            id_ErrorEdad.setText("");
+            validAge.setValue(Boolean.TRUE);
+        }else if (años == 17 && meses == 0 && dias == 0) {
+            id_ErrorEdad.setText("");
+            validAge.setValue(Boolean.TRUE);
+        }else {id_ErrorEdad.setText("El usuario debe ser mayor de edad.");}
         
-        
-        a.show();
     }
 
     
@@ -198,49 +213,56 @@ public class FXMLRegistroController implements Initializable {
     // you must initialize here all related with the object 
     @Override
     public void initialize(URL url, ResourceBundle rb)  {
-        // TODO
         
+        //variables valid_
         validEmail = new SimpleBooleanProperty();
         validPassword = new SimpleBooleanProperty();   
         equalPasswords = new SimpleBooleanProperty();
         validName = new SimpleBooleanProperty();
         validAge = new SimpleBooleanProperty();
         
+        //inicializadas a FALSE
         validPassword.setValue(Boolean.FALSE);
         validEmail.setValue(Boolean.FALSE);
         equalPasswords.setValue(Boolean.FALSE);
+        validName.setValue(Boolean.FALSE);
+        validAge.setValue(Boolean.FALSE);
         
-      
+        //AND de todas las condiciones, la comprobacion final es sobre validFields
         BooleanBinding validFields = Bindings.and(validEmail, validPassword).and(equalPasswords).and(validName).and(validAge);
-        
+                
         id_correo.focusedProperty().addListener((observable, oldValue, newValue)-> {
-            if(!newValue){checkEditEmail(); //si se ha perdido el focus
+            if(!newValue){checkEditEmail(); 
             }});
-        id_contraseña.focusedProperty().addListener((observable, oldValue, newValue)-> {
-            if(!newValue){checkEditPassword(); //si se ha perdido el focus
+        id_contraseña.focusedProperty().addListener((observable, oldValue, newValue)-> { //HAY QUE SOBREESCRIBIR EL PATRON DE LA CONTRASEÑA
+            if(!newValue){checkEditPassword(); 
             }});
         id_contraseña1.focusedProperty().addListener((observable, oldValue, newValue)-> {
-            if(!newValue){checkEquals(); //si se ha perdido el focus
-            }});
-        id_nombre.focusedProperty().addListener((observable, oldValue, newValue)-> {
-            if(!newValue){checkEquals(); //si se ha perdido el focus
+            if(!newValue){checkEquals(); 
             }});
         
+        //FALTA POR IMPLEMENTAR (necesita usuario y base de datos)
+        id_nombre.focusedProperty().addListener((observable, oldValue, newValue)-> {
+            if(!newValue){//chekName();; 
+            }});
+        
+        //comprobacion final
         id_buttonA.disableProperty().bind(Bindings.not(validFields));
 
+        
     }    
 
-    @FXML
+    @FXML   //CANCELAR... sustituir el string por nombre del .fxml de la ventana INICIAR SESION
     private void handleCancelOnAction(ActionEvent event) throws IOException {
-        switchToScene(event, "FXMLDocument"); //sustituir el string por nombre del .fxml de la ventana INICIAR SESION
+        switchToScene(event, "FXMLDocument");
     }
 
-    @FXML
+    @FXML   //ACEPTAR... sustituir el string por nombre del .fxml de la ventana FUNCIONES
     private void handleAcceptOnAction(ActionEvent event) throws IOException {
-        switchToScene(event, "FXMLDocument"); //sustituir el string por nombre del .fxml de la ventana FUNCIONES
+        switchToScene(event, "FXMLDocument");
     }
 
-    @FXML
+    @FXML   //SELECCIONAR IMAGEN... falta mantener el ratio de imagen (sino el resto de bloques se descolocan)
     private void handlePressedAction(MouseEvent event) throws FileNotFoundException{
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Selecciona imagen de perfil");
@@ -249,6 +271,11 @@ public class FXMLRegistroController implements Initializable {
         
         Image imagen = new Image(new FileInputStream(selectedFile));
         id_imagen.setImage(imagen);  
+    }
+
+    @FXML   //SELECCION DE FECHA NACIMIENTO
+    private void handleDate(ActionEvent event) {
+        checkAge();
     }
     
     
