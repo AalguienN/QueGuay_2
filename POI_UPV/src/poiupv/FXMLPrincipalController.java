@@ -50,6 +50,7 @@ public class FXMLPrincipalController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             datos = Navegacion.getSingletonNavegacion();
+            
         } catch (NavegacionDAOException ex) {
             Logger.getLogger(FXMLPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
         }
