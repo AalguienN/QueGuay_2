@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -47,6 +48,7 @@ public class FXMLInicioController implements Initializable{
     
     private Navegacion datos; //creacion del Map
     private Stage primaryStage;
+    private Scene scene;
     
     /**
      * Initializes the controller class.
@@ -71,39 +73,18 @@ public class FXMLInicioController implements Initializable{
         });
     }
     
-    private void irAPrincipal() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            primaryStage.setTitle("Principal");
-            primaryStage.setScene(scene);
-            FXMLInicioController inicio = loader.getController();
-            inicio.initStage(primaryStage);
-            primaryStage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLInicioController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       //CAMBIAR ESCENA: parametros son el evento causante y el nombre del fichero .fxml
+    public void switchToScene(ActionEvent event, String name) throws IOException {
+  
+        Parent root = FXMLLoader.load(getClass().getResource(name+".fxml"));
+        primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
-    
-        private void irARegistro() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLRegistro.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            primaryStage.setTitle("Registro");
-            primaryStage.setScene(scene);
-            FXMLInicioController inicio = loader.getController();
-            inicio.initStage(primaryStage);
-            primaryStage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLInicioController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
     
     @FXML
-    private void iniciarSesion(ActionEvent event) {
+    private void iniciarSesion(ActionEvent event) throws IOException {
         id_usuarioIncorrecto.visibleProperty().set(false); //siempre que le des a iniciar sesión desaparece el mensaje de error
         id_contraseñaIncorrecta.visibleProperty().set(false); //siempre que le des a iniciar sesión desaparece el mensaje de error
         if(!datos.exitsNickName(id_usuario.textProperty().getValueSafe())){ //comprueba si no existe el usuario en la base de datos y muestra el mensaje de error
@@ -114,7 +95,7 @@ public class FXMLInicioController implements Initializable{
                 if(user == null){
                         id_contraseñaIncorrecta.visibleProperty().set(true); 
                 }else{ //si todo está bien, te envía al principal
-                    irAPrincipal();
+                    switchToScene(event, "FXMLDocument");
                 }
         }
     }
@@ -125,8 +106,8 @@ public class FXMLInicioController implements Initializable{
     }   
     
     @FXML
-    private void registrase(ActionEvent event) {
-        irARegistro();
+    private void registrase(ActionEvent event) throws IOException {
+        switchToScene(event, "FXMLRegistro");
     }
     
     void initStage(Stage stage) {

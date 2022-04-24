@@ -118,18 +118,18 @@ public class FXMLRegistroController implements Initializable {
     
     //COMPROBAR NOMBRE VÁLIDO Y NO REPETIDO
     public void checkName() {
-        if(!navegador.exitsNickName(id_nombre.textProperty().getValueSafe()) && User.checkNickName(id_nombre.textProperty().getValueSafe())) {
-            validName.setValue(Boolean.TRUE);
-            id_nombre.styleProperty().setValue("-fx-background-color: #CDFFD0");
-        } else if ("".equals(id_nombre.getText())) {
-            validName.setValue(Boolean.FALSE);
-            id_nombre.styleProperty().setValue("-fx-background-color: #FCE5E0");
-        } else {
+        if(navegador.exitsNickName(id_nombre.getText()) && !User.checkNickName(id_nombre.getText())) {
             validName.setValue(Boolean.FALSE);
             mensaje = "El nombre de usuario no está disponible o no es válido. El nombre debe contener [6-15] caracteres, letras mayúsculas, minúsculas o guiones '-' y '_'";
             id_nombre.styleProperty().setValue("-fx-background-color: #FCE5E0");
             alerta.setContentText(mensaje);
             //alerta.showAndWait();
+        } else if ("".equals(id_nombre.getText())) {
+            validName.setValue(Boolean.FALSE);
+            id_nombre.styleProperty().setValue("-fx-background-color: #FCE5E0");
+        } else {
+            validName.setValue(Boolean.TRUE);
+            id_nombre.styleProperty().setValue("-fx-background-color: #CDFFD0");
         }
     }
      
@@ -168,6 +168,8 @@ public class FXMLRegistroController implements Initializable {
     // you must initialize here all related with the object 
     @Override
     public void initialize(URL url, ResourceBundle rb)  {
+        
+        
         
         //inicializar Navegacion (navegador)
         try {
@@ -223,7 +225,7 @@ public class FXMLRegistroController implements Initializable {
 
     @FXML   //CANCELAR... sustituir el string por nombre del .fxml de la ventana INICIAR SESION
     private void handleCancelOnAction(ActionEvent event) throws IOException {
-        switchToScene(event, "FXMLDocument");
+        switchToScene(event, "FXMLInicio");
     }
 
     @FXML   //ACEPTAR... sustituir el string por nombre del .fxml de la ventana FUNCIONES

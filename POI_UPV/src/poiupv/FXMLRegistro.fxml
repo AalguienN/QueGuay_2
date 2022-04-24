@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -39,18 +40,24 @@
       <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="360.0" spacing="25.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0" />
-            <Button fx:id="id_buttonA" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleCancelOnAction" prefWidth="100.0" style="-fx-background-color: #0685BC;" text="Aceptar" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="id_buttonA" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleAcceptOnAction" prefWidth="100.0" style="-fx-background-color: #0685BC;" text="Aceptar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <Button fx:id="id_buttonC" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleAcceptOnAction" prefWidth="100.0" style="-fx-background-color: #0685BC;" text="Cancelar" textFill="WHITE">
+            <Button fx:id="id_buttonC" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleCancelOnAction" prefWidth="100.0" style="-fx-background-color: #0685BC;" text="Cancelar" textFill="WHITE">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
          <BorderPane.margin>
@@ -69,7 +76,7 @@
                      </HBox.margin></Label>
                   <VBox>
                      <children>
-                        <TextField fx:id="id_nombre" minWidth="350.0" promptText="nickName">
+                        <TextField fx:id="id_nombre" alignment="CENTER" minWidth="350.0">
                            <VBox.margin>
                               <Insets left="10.0" />
                            </VBox.margin></TextField>
@@ -91,7 +98,7 @@
                      </HBox.margin></Label>
                   <VBox>
                      <children>
-                        <TextField fx:id="id_correo" minWidth="350.0" promptText="yourEmail@domain.com">
+                        <TextField fx:id="id_correo" alignment="CENTER" minWidth="350.0" promptText="yourEmail@domain.com">
                            <VBox.margin>
                               <Insets left="10.0" />
                            </VBox.margin></TextField>
