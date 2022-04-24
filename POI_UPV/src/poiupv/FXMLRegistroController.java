@@ -93,7 +93,7 @@ public class FXMLRegistroController implements Initializable {
     private Label id_SelecImagen;
     
    //CAMBIAR ESCENA: parametros son el evento causante y el nombre del fichero .fxml
-    public void switchToScene(ActionEvent event, String name) throws IOException {
+    private void switchToScene(ActionEvent event, String name) throws IOException {
   
         Parent root = FXMLLoader.load(getClass().getResource(name+".fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();

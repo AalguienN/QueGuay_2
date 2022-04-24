@@ -29,7 +29,6 @@ public class PoiUPVApp extends Application {
         FXMLInicioController inicio = loader.getController();
         inicio.initStage(stage);
         stage.setResizable(false);
-        
         stage.show();
     }
 

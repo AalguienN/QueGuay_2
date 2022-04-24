@@ -22,6 +22,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import static javafx.scene.input.KeyCode.ENTER;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.Navegacion;
 import model.User;
@@ -73,7 +75,7 @@ public class FXMLInicioController implements Initializable{
         });
     }
        //CAMBIAR ESCENA: parametros son el evento causante y el nombre del fichero .fxml
-    public void switchToScene(ActionEvent event, String name) throws IOException {
+    private void switchToScene(ActionEvent event, String name) throws IOException {
   
         Parent root = FXMLLoader.load(getClass().getResource(name+".fxml"));
         primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -113,5 +115,7 @@ public class FXMLInicioController implements Initializable{
         primaryStage = stage;
     }
 
-
+    @FXML
+    private void teclaEnter(KeyEvent event) {
+    }
 }
