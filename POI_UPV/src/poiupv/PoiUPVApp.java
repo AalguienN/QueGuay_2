@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.SplitPane;
 import javafx.stage.Stage;
 
 /**
@@ -27,6 +28,8 @@ public class PoiUPVApp extends Application {
         stage.setScene(scene);
         FXMLInicioController inicio = loader.getController();
         inicio.initStage(stage);
+        stage.setResizable(false);
+        
         stage.show();
     }
 

@@ -109,7 +109,7 @@ public class FXMLRegistroController implements Initializable {
             mensaje = "El correo no es válido.";
             id_correo.styleProperty().setValue("-fx-background-color: #FCE5E0");
             alerta.setContentText(mensaje);
-            //alerta.showAndWait();
+            alerta.showAndWait();
         }else{
             validEmail.setValue(Boolean.TRUE);
             id_correo.styleProperty().setValue("-fx-background-color: #CDFFD0");
@@ -123,7 +123,7 @@ public class FXMLRegistroController implements Initializable {
             mensaje = "El nombre de usuario no está disponible o no es válido. El nombre debe contener [6-15] caracteres, letras mayúsculas, minúsculas o guiones '-' y '_'";
             id_nombre.styleProperty().setValue("-fx-background-color: #FCE5E0");
             alerta.setContentText(mensaje);
-            //alerta.showAndWait();
+            alerta.showAndWait();
         } else if ("".equals(id_nombre.getText())) {
             validName.setValue(Boolean.FALSE);
             id_nombre.styleProperty().setValue("-fx-background-color: #FCE5E0");
@@ -140,7 +140,7 @@ public class FXMLRegistroController implements Initializable {
             mensaje = "La contraseña no es válida. La contraseña debe contener [8-20] caracteres, contener al menos una letra mayúscula, una letra minúscula, un dígito y un caracter especial [!@#$%&*()-+=]. No debe contener espacios";
             id_contraseña.styleProperty().setValue("-fx-background-color: #FCE5E0");
             alerta.setContentText(mensaje);
-            //alerta.showAndWait();
+            alerta.showAndWait();
         }else {
             validPassword.setValue(Boolean.TRUE);
             id_contraseña.styleProperty().setValue("-fx-background-color: #CDFFD0");
@@ -160,7 +160,7 @@ public class FXMLRegistroController implements Initializable {
             mensaje = "No coincide con la contraseña. Compruebe que haya escrito la misma contraseña.";
             id_contraseña1.styleProperty().setValue("-fx-background-color: #FCE5E0");
             alerta.setContentText(mensaje);
-            //alerta.showAndWait(); 
+            alerta.showAndWait(); 
         }
     }
     
@@ -261,11 +261,7 @@ public class FXMLRegistroController implements Initializable {
         }else {
             validAge.setValue(Boolean.FALSE);
             mensaje = "El usuario debe ser mayor de edad.";
-            //alerta.showAndWait();
+            alerta.showAndWait();
         }
     }
-
-
-    
-    
 }

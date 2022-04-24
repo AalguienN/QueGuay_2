@@ -72,7 +72,6 @@ public class FXMLInicioController implements Initializable{
             
         });
     }
-    
        //CAMBIAR ESCENA: parametros son el evento causante y el nombre del fichero .fxml
     public void switchToScene(ActionEvent event, String name) throws IOException {
   
