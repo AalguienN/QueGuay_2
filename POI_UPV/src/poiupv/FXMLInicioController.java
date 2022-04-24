@@ -107,7 +107,7 @@ public class FXMLInicioController implements Initializable{
     
     @FXML
     private void registrase(ActionEvent event) throws IOException {
-        switchToScene(event, "FXMLRegistro");
+        switchToScene(event, "FXMLEstadisticas");
     }
     
     void initStage(Stage stage) {
