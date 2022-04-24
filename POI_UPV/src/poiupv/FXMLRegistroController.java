@@ -118,18 +118,18 @@ public class FXMLRegistroController implements Initializable {
     
     //COMPROBAR NOMBRE VÁLIDO Y NO REPETIDO
     public void checkName() {
-        if(!navegador.exitsNickName(id_nombre.getText()) && User.checkNickName(id_nombre.getText())) {
-            validName.setValue(Boolean.TRUE);
-            id_nombre.styleProperty().setValue("-fx-background-color: #CDFFD0");
-        } else if ("".equals(id_nombre.getText())) {
-            validName.setValue(Boolean.FALSE);
-            id_nombre.styleProperty().setValue("-fx-background-color: #FCE5E0");
-        } else {
+        if(navegador.exitsNickName(id_nombre.getText()) && !User.checkNickName(id_nombre.getText())) {
             validName.setValue(Boolean.FALSE);
             mensaje = "El nombre de usuario no está disponible o no es válido. El nombre debe contener [6-15] caracteres, letras mayúsculas, minúsculas o guiones '-' y '_'";
             id_nombre.styleProperty().setValue("-fx-background-color: #FCE5E0");
             alerta.setContentText(mensaje);
             //alerta.showAndWait();
+        } else if ("".equals(id_nombre.getText())) {
+            validName.setValue(Boolean.FALSE);
+            id_nombre.styleProperty().setValue("-fx-background-color: #FCE5E0");
+        } else {
+            validName.setValue(Boolean.TRUE);
+            id_nombre.styleProperty().setValue("-fx-background-color: #CDFFD0");
         }
     }
      
@@ -168,6 +168,8 @@ public class FXMLRegistroController implements Initializable {
     // you must initialize here all related with the object 
     @Override
     public void initialize(URL url, ResourceBundle rb)  {
+        
+        
         
         //inicializar Navegacion (navegador)
         try {
