@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -38,23 +39,25 @@
    <bottom>
       <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="360.0" spacing="25.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0">
-               <children>
-                  <Label fx:id="id_errorLabel" textFill="#ca0505" visible="false" />
-               </children>
-            </HBox>
-            <Button fx:id="id_buttonA" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleCancelOnAction" prefWidth="100.0" style="-fx-background-color: #0685BC;" text="Aceptar" textAlignment="CENTER" textFill="WHITE">
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0" />
+            <Button fx:id="id_buttonA" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleAcceptOnAction" prefWidth="100.0" style="-fx-background-color: #0685BC;" text="Aceptar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <Button fx:id="id_buttonC" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleAcceptOnAction" prefWidth="100.0" style="-fx-background-color: #0685BC;" text="Cancelar" textFill="WHITE">
+            <Button fx:id="id_buttonC" alignment="CENTER" minWidth="80.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleCancelOnAction" prefWidth="100.0" style="-fx-background-color: #0685BC;" text="Cancelar" textFill="WHITE">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
          <BorderPane.margin>
@@ -69,7 +72,7 @@
                <children>
                   <Label text="Nombre:" textFill="#025477">
                      <HBox.margin>
-                        <Insets bottom="20.0" />
+                        <Insets />
                      </HBox.margin></Label>
                   <VBox>
                      <children>
@@ -77,7 +80,6 @@
                            <VBox.margin>
                               <Insets left="10.0" />
                            </VBox.margin></TextField>
-                        <Label fx:id="id_ErrorName" textFill="#ca0505" visible="false" />
                      </children>
                   </VBox>
                </children>
@@ -85,14 +87,14 @@
                   <Insets />
                </opaqueInsets>
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="10.0" />
                </VBox.margin>
             </HBox>
             <HBox alignment="CENTER_LEFT">
                <children>
                   <Label prefWidth="47.2" text="Correo: " textFill="#025477">
                      <HBox.margin>
-                        <Insets bottom="20.0" />
+                        <Insets />
                      </HBox.margin></Label>
                   <VBox>
                      <children>
@@ -100,15 +102,17 @@
                            <VBox.margin>
                               <Insets left="10.0" />
                            </VBox.margin></TextField>
-                        <Label fx:id="id_ErrorCorreo" textFill="#ca0505" visible="false" />
                      </children>
                   </VBox>
                </children>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER_LEFT">
                <children>
                   <VBox alignment="CENTER">
                      <children>
@@ -116,51 +120,37 @@
                            <children>
                               <Label prefHeight="18.0" prefWidth="90.0" text="Contraseña:" textFill="#025477">
                                  <HBox.margin>
-                                    <Insets bottom="20.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </Label>
-                              <VBox>
-                                 <children>
-                                    <PasswordField fx:id="id_contraseña" prefWidth="136.0">
-                                       <VBox.margin>
-                                          <Insets left="10.0" />
-                                       </VBox.margin>
-                                    </PasswordField>
-                                    <Label fx:id="id_ErrorContraValido" textFill="#ca0505" visible="false" />
-                                 </children>
+                              <PasswordField fx:id="id_contraseña" prefWidth="136.0">
                                  <HBox.margin>
-                                    <Insets left="20.0" />
+                                    <Insets left="25.0" />
                                  </HBox.margin>
-                              </VBox>
+                              </PasswordField>
                            </children>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
                            <VBox.margin>
-                              <Insets />
+                              <Insets bottom="10.0" />
                            </VBox.margin>
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                            <children>
                               <Label prefHeight="18.0" prefWidth="174.0" text="Repetir contraseña:" textFill="#025477">
                                  <HBox.margin>
-                                    <Insets bottom="20.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </Label>
-                              <VBox>
-                                 <children>
-                                    <PasswordField fx:id="id_contraseña1" prefWidth="200.0">
-                                       <VBox.margin>
-                                          <Insets left="10.0" />
-                                       </VBox.margin>
-                                    </PasswordField>
-                                    <Label fx:id="id_ErrorContraIgual" textFill="#ca0505" visible="false" />
-                                 </children>
-                              </VBox>
+                              <PasswordField fx:id="id_contraseña1" prefWidth="200.0" />
                            </children>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
                         </HBox>
                         <VBox alignment="TOP_CENTER">
                            <children>
@@ -169,12 +159,11 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <DatePicker fx:id="id_FechaNacimiento">
+                              <DatePicker fx:id="id_FechaNacimiento" onAction="#handleDate">
                                  <VBox.margin>
                                     <Insets top="5.0" />
                                  </VBox.margin>
                               </DatePicker>
-                              <Label fx:id="id_ErrorEdad" textFill="RED" />
                            </children>
                            <VBox.margin>
                               <Insets top="15.0" />
@@ -184,10 +173,10 @@
                   </VBox>
                   <VBox alignment="CENTER">
                      <children>
-                        <Label text="Foto de perfil:" textFill="#025477" />
+                        <Label text="Imagen de perfil:" textFill="#025477" />
                         <ImageView fx:id="id_imagen" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../recursos_entrega/avatars/default.png" />
+                              <Image url="@../avatars/default.png" />
                            </image>
                         </ImageView>
                         <Label fx:id="id_SelecImagen" contentDisplay="BOTTOM" onMousePressed="#handlePressedAction" text="Seleccionar imagen..." textAlignment="CENTER" textFill="#1a00ff" underline="true">

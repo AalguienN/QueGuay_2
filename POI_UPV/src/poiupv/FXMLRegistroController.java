@@ -4,10 +4,17 @@
  */
 package poiupv;
 
+import DBAccess.NavegacionDAOException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import static java.lang.Math.abs;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
@@ -19,39 +26,52 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import model.Navegacion;
+import model.User;
 
 /**
  * FXML Controller class
  *
- * @author marta
+ * @author varios
  */
 public class FXMLRegistroController implements Initializable {
     
     //properties to control valid fieds values. 
     private BooleanProperty validPassword;
     private BooleanProperty validEmail;
-    private BooleanProperty equalPasswords;  
+    private BooleanProperty equalsPassword;  
     private BooleanProperty validName;
     private BooleanProperty validAge;
     
-    //private BooleanBinding validFields;
+    //VARIABLES PARA CAMBIAR DE ESCENA
+    
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+    
+    //VARIABLES PARA VENTANAS EMERGENTES
+    Alert alerta = new Alert(AlertType.WARNING);
+    String mensaje;
+    
+    //Objeto Navegacion
+    Navegacion navegador;
     
     //When to strings are equal, compareTo returns zero
     private final int EQUALS = 0;  
     
-    
-    @FXML
-    private Label id_errorLabel;
     @FXML
     private Button id_buttonA;
     @FXML
@@ -59,35 +79,20 @@ public class FXMLRegistroController implements Initializable {
     @FXML
     private TextField id_nombre;
     @FXML
-    private Label id_ErrorName;
-    @FXML
     private TextField id_correo;
-    @FXML
-    private Label id_ErrorCorreo;
     @FXML
     private PasswordField id_contraseña;
     @FXML
-    private Label id_ErrorContraValido;
-    @FXML
     private PasswordField id_contraseña1;
     @FXML
-    private Label id_ErrorContraIgual;
-    @FXML
     private DatePicker id_FechaNacimiento;
-    @FXML
     private Label id_ErrorEdad;
     @FXML
     private ImageView id_imagen;
     @FXML
     private Label id_SelecImagen;
-
-    //COMO CAMBIAR DE ESCENA (SUSTITUIR)
     
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-    
-   
+   //CAMBIAR ESCENA: parametros son el evento causante y el nombre del fichero .fxml
     public void switchToScene(ActionEvent event, String name) throws IOException {
   
         Parent root = FXMLLoader.load(getClass().getResource(name+".fxml"));
@@ -96,133 +101,171 @@ public class FXMLRegistroController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-   
-    //FIN
 
-    /**
-     * Initializes the controller class.
-     */
-    private void manageError(Label errorLabel,TextField textField, BooleanProperty boolProp ){
-        boolProp.setValue(Boolean.FALSE);
-        showErrorMessage(errorLabel,textField);
-        textField.requestFocus();
- 
-    }
-    /**
-     * Updates the boolProp to true. Changes the background 
-     * of the edit to the default value. Makes the error label invisible. 
-     * @param errorLabel label added to alert the user
-     * @param textField edit text added to allow user to introduce the value
-     * @param boolProp property which stores if the value is correct or not
-     */
-    private void manageCorrect(Label errorLabel,TextField textField, BooleanProperty boolProp ){
-        boolProp.setValue(Boolean.TRUE);
-        hideErrorMessage(errorLabel,textField);
-        
-    }
-    /**
-     * Changes to red the background of the edit and
-     * makes the error label visible
-     * @param errorLabel
-     * @param textField 
-     */
-    private void showErrorMessage(Label errorLabel,TextField textField)
-    {
-        errorLabel.visibleProperty().set(true);
-        textField.styleProperty().setValue("-fx-background-color: #FCE5E0");    
-    }
-    /**
-     * Changes the background of the edit to the default value
-     * and makes the error label invisible.
-     * @param errorLabel
-     * @param textField 
-     */
-    private void hideErrorMessage(Label errorLabel,TextField textField)
-    {
-        errorLabel.visibleProperty().set(false);
-        textField.styleProperty().setValue("");
-    }
-
-    private void checkEditEmail() {
-        if(!Utils.checkEmail(id_correo.textProperty().getValueSafe())){
-            manageError(id_ErrorCorreo, id_correo, validEmail);
-        } else {
-            manageCorrect(id_ErrorCorreo, id_correo, validEmail);
+    //COMPROBACION EMAIL VÁLIDO...[¿COMPROBAR REPETIDO?]
+    public void checkEmail() {
+        if(!User.checkEmail(id_correo.getText())) {
+            validEmail.setValue(Boolean.FALSE);
+            mensaje = "El correo no es válido.";
+            id_correo.styleProperty().setValue("-fx-background-color: #FCE5E0");
+            alerta.setContentText(mensaje);
+            //alerta.showAndWait();
+        }else{
+            validEmail.setValue(Boolean.TRUE);
+            id_correo.styleProperty().setValue("-fx-background-color: #CDFFD0");
         }
     }
     
-    private void checkEquals(){
-        if(id_contraseña.textProperty().getValueSafe().compareTo(id_contraseña1.textProperty().getValueSafe()) != EQUALS) {
-            showErrorMessage(id_ErrorContraIgual,id_contraseña1);
-            equalPasswords.setValue(Boolean.FALSE);
-            id_contraseña.textProperty().setValue("");
-            id_contraseña1.textProperty().setValue("");
-            id_contraseña.requestFocus();
-            }else {
-                manageCorrect(id_ErrorContraIgual,id_contraseña1,equalPasswords); 
-            }
-        }
-   
-    private void checkEditPassword() {
-        if(!Utils.checkPassword(id_contraseña.textProperty().getValueSafe())){
-            manageError(id_errorLabel, id_contraseña, validPassword);
+    //COMPROBAR NOMBRE VÁLIDO Y NO REPETIDO
+    public void checkName() {
+        if(navegador.exitsNickName(id_nombre.getText()) && !User.checkNickName(id_nombre.getText())) {
+            validName.setValue(Boolean.FALSE);
+            mensaje = "El nombre de usuario no está disponible o no es válido. El nombre debe contener [6-15] caracteres, letras mayúsculas, minúsculas o guiones '-' y '_'";
+            id_nombre.styleProperty().setValue("-fx-background-color: #FCE5E0");
+            alerta.setContentText(mensaje);
+            //alerta.showAndWait();
+        } else if ("".equals(id_nombre.getText())) {
+            validName.setValue(Boolean.FALSE);
+            id_nombre.styleProperty().setValue("-fx-background-color: #FCE5E0");
         } else {
-            manageCorrect(id_errorLabel, id_contraseña, validPassword);
+            validName.setValue(Boolean.TRUE);
+            id_nombre.styleProperty().setValue("-fx-background-color: #CDFFD0");
         }
     }
-
+     
+    //COMPROBAR CONTRASEÑA VÁLIDA
+    public void checkPassword() {
+        if(!User.checkPassword(id_contraseña.getText())) {
+            validPassword.setValue(Boolean.FALSE);
+            mensaje = "La contraseña no es válida. La contraseña debe contener [8-20] caracteres, contener al menos una letra mayúscula, una letra minúscula, un dígito y un caracter especial [!@#$%&*()-+=]. No debe contener espacios";
+            id_contraseña.styleProperty().setValue("-fx-background-color: #FCE5E0");
+            alerta.setContentText(mensaje);
+            //alerta.showAndWait();
+        }else {
+            validPassword.setValue(Boolean.TRUE);
+            id_contraseña.styleProperty().setValue("-fx-background-color: #CDFFD0");
+        }
+    }
+    
+    //COMPROBAR CONTRASEÑAS IGUALES
+    public void checkEqualsPassword() {
+        if("".equals(id_contraseña1.getText())){
+            equalsPassword.setValue(Boolean.FALSE);
+            id_contraseña1.styleProperty().setValue("-fx-background-color: #FCE5E0");
+        } else if(id_contraseña.textProperty().getValueSafe().compareTo(id_contraseña1.textProperty().getValueSafe()) == EQUALS){
+            equalsPassword.setValue(Boolean.TRUE);
+            id_contraseña1.styleProperty().setValue("-fx-background-color: #CDFFD0");
+        }else {
+            equalsPassword.setValue(Boolean.FALSE);
+            mensaje = "No coincide con la contraseña. Compruebe que haya escrito la misma contraseña.";
+            id_contraseña1.styleProperty().setValue("-fx-background-color: #FCE5E0");
+            alerta.setContentText(mensaje);
+            //alerta.showAndWait(); 
+        }
+    }
     
     //=========================================================
     // you must initialize here all related with the object 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL url, ResourceBundle rb)  {
         
+        
+        
+        //inicializar Navegacion (navegador)
+        try {
+            navegador = Navegacion.getSingletonNavegacion();
+        } catch (NavegacionDAOException ex) {
+            Logger.getLogger(FXMLRegistroController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //INICIALIZA LAS VENTANAS EMERGENTES -> ESTO ESTA CAUSANDO EL ERROR...
+        alerta.setTitle("Datos inválidos");
+        alerta.setHeaderText(null);
+        
+        //variables valid_
         validEmail = new SimpleBooleanProperty();
         validPassword = new SimpleBooleanProperty();   
-        equalPasswords = new SimpleBooleanProperty();
+        equalsPassword = new SimpleBooleanProperty();
         validName = new SimpleBooleanProperty();
         validAge = new SimpleBooleanProperty();
         
+        //inicializadas a FALSE
         validPassword.setValue(Boolean.FALSE);
         validEmail.setValue(Boolean.FALSE);
-        equalPasswords.setValue(Boolean.FALSE);
-        
-      
-        BooleanBinding validFields = Bindings.and(validEmail, validPassword).and(equalPasswords).and(validName).and(validAge);
+        equalsPassword.setValue(Boolean.FALSE);
+        validName.setValue(Boolean.FALSE);
+        validAge.setValue(Boolean.FALSE);
+
+        //AND de todas las condiciones, la comprobacion final es sobre validFields
+        BooleanBinding validFields = Bindings.and(validEmail, validPassword).and(equalsPassword).and(validName).and(validAge);
+                
+        //LISTENERS de Nombre, Corre, Contraseña, Comprobacion Contraseña...
+        id_nombre.focusedProperty().addListener((observable, oldValue, newValue)-> {
+            if(!newValue){checkName(); 
+            }});
         
         id_correo.focusedProperty().addListener((observable, oldValue, newValue)-> {
-            if(!newValue){checkEditEmail(); //si se ha perdido el focus
+            if(!newValue){checkEmail(); 
             }});
+        
         id_contraseña.focusedProperty().addListener((observable, oldValue, newValue)-> {
-            if(!newValue){checkEditPassword(); //si se ha perdido el focus
+            if(!newValue){checkPassword(); 
             }});
+        
         id_contraseña1.focusedProperty().addListener((observable, oldValue, newValue)-> {
-            if(!newValue){checkEquals(); //si se ha perdido el focus
+            if(!newValue){checkEqualsPassword(); 
             }});
         
         
-        id_buttonA.disableProperty().bind(Bindings.not(validFields)); // debe pasar a la ventana de FUNCIONES
-     
-        id_buttonC.setOnAction( (event)->{id_buttonC.getScene().getWindow().hide();});  //debe volver a la ventana de INICIAR SESION
+        //comprobacion boton aceptar
+        id_buttonA.disableProperty().bind(Bindings.not(validFields));
+    }  
+    
+    
 
-    }    
-
-    @FXML
-    private void handleCancelOnAction(ActionEvent event) {
+    @FXML   //CANCELAR... sustituir el string por nombre del .fxml de la ventana INICIAR SESION
+    private void handleCancelOnAction(ActionEvent event) throws IOException {
+        switchToScene(event, "FXMLInicio");
     }
 
-    @FXML
-    private void handleAcceptOnAction(ActionEvent event) {
+    @FXML   //ACEPTAR... sustituir el string por nombre del .fxml de la ventana FUNCIONES
+    private void handleAcceptOnAction(ActionEvent event) throws IOException, NavegacionDAOException {
+        navegador.registerUser(id_nombre.getText(), id_correo.getText(), id_contraseña.getText(), id_imagen.getImage(), id_FechaNacimiento.getValue());
+        switchToScene(event, "FXMLPrincipal");
     }
 
-    @FXML
-    private void handlePressedAction(MouseEvent event) {
+    @FXML   //SELECCIONAR IMAGEN... falta mantener el ratio de imagen (sino el resto de bloques se descolocan)
+    private void handlePressedAction(MouseEvent event) throws FileNotFoundException{
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("abrir fichero");
-        fileChooser.getExtesionFilters().addAll(new ExtensionFilter("Imágenes", "*.png", "*.jpg"));
+        fileChooser.setTitle("Selecciona imagen de perfil");
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.gif"));
         File selectedFile = fileChooser.showOpenDialog(((Node)event.getSource()).getScene().getWindow());
-   
+        
+        Image imagen = new Image(new FileInputStream(selectedFile));
+        id_imagen.setImage(imagen);  
     }
+
+    @FXML   //SELECCION DE FECHA NACIMIENTO
+    private void handleDate(ActionEvent event) {
+        LocalDate fecha = id_FechaNacimiento.getValue();
+        LocalDate actual = LocalDate.now();
+        
+        int años = actual.getYear() - fecha.getYear();
+        int meses = abs(actual.getMonthValue() - fecha.getMonthValue());
+        int dias = abs(actual.getDayOfMonth() - fecha.getDayOfMonth());
+ 
+        if(años >= 16) {
+            validAge.setValue(Boolean.TRUE);
+        }else if (años == 15 && meses == 0 && dias == 0) {
+            validAge.setValue(Boolean.TRUE);
+        }else {
+            validAge.setValue(Boolean.FALSE);
+            mensaje = "El usuario debe ser mayor de edad.";
+            //alerta.showAndWait();
+        }
+    }
+
+
+    
     
 }
