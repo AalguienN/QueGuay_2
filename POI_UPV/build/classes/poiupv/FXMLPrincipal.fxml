@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -14,7 +15,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <GridPane gridLinesVisible="true" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.FXMLPrincipalController">
    <columnConstraints>
@@ -65,8 +65,9 @@
                      <children>
                         <MenuButton mnemonicParsing="false">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="Cerrar Sesión" />
                             <MenuItem mnemonicParsing="false" text="Editar Perfil" />
+                            <MenuItem mnemonicParsing="false" text="Cerrar Sesión" />
+                              <MenuItem fx:id="id_salir" mnemonicParsing="false" onAction="#salir" text="Salir a Escritorio" />
                           </items>
                            <HBox.margin>
                               <Insets right="25.0" />
@@ -83,11 +84,12 @@
       </AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="160.0" prefWidth="100.0" GridPane.columnIndex="1">
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </VBox>
+            <ImageView fitHeight="400.0" fitWidth="350.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../resources/carta_nautica.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </children>

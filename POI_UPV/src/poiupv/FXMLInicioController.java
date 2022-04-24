@@ -57,11 +57,11 @@ public class FXMLInicioController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
         try {
             datos = Navegacion.getSingletonNavegacion();
-            String nickName = "nickName";
+            /*String nickName = "nickName";
             String email = "email@domain.es";
             String password = "miPassword";
             LocalDate birthdate = LocalDate.now().minusYears(18);
-            User result = datos.registerUser(nickName, email, password, birthdate);
+            User result = datos.registerUser(nickName, email, password, birthdate);*/
         } catch (NavegacionDAOException ex) {
             Logger.getLogger(FXMLInicioController.class.getName()).log(Level.SEVERE, null, ex);
         }
