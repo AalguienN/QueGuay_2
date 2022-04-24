@@ -63,6 +63,12 @@ public class FXMLInicioController implements Initializable{
         } catch (NavegacionDAOException ex) {
             Logger.getLogger(FXMLInicioController.class.getName()).log(Level.SEVERE, null, ex);
         }
+                id_usuario.focusedProperty().addListener((observable,oldValue,newValue) -> {
+            if(!newValue){
+                id_usuarioIncorrecto.visibleProperty().set(false);
+            }
+            
+        });
     }
     
     private void irAPrincipal() {
