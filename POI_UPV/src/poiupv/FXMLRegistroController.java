@@ -225,13 +225,13 @@ public class FXMLRegistroController implements Initializable {
 
     @FXML   //CANCELAR... sustituir el string por nombre del .fxml de la ventana INICIAR SESION
     private void handleCancelOnAction(ActionEvent event) throws IOException {
-        switchToScene(event, "FXMLDocument");
+        switchToScene(event, "FXMLInicio");
     }
 
     @FXML   //ACEPTAR... sustituir el string por nombre del .fxml de la ventana FUNCIONES
     private void handleAcceptOnAction(ActionEvent event) throws IOException, NavegacionDAOException {
         navegador.registerUser(id_nombre.getText(), id_correo.getText(), id_contraseña.getText(), id_imagen.getImage(), id_FechaNacimiento.getValue());
-        switchToScene(event, "FXMLDocument");
+        switchToScene(event, "FXMLPrincipal");
     }
 
     @FXML   //SELECCIONAR IMAGEN... falta mantener el ratio de imagen (sino el resto de bloques se descolocan)
