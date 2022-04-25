@@ -69,7 +69,7 @@
                      <children>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/lupa.png" />
+                              <Image url="@../resources/lupa%20j%20.png" />
                            </image>
                            <HBox.margin>
                               <Insets right="5.0" top="5.0" />
@@ -117,7 +117,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/lapiz.png" />
+                        <Image url="@../resources/lapiz%20j%20.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -126,7 +126,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/regla.png" />
+                        <Image url="@../resources/regla%20j%20.png" />
                      </image>
                   </ImageView>
                </graphic>
