@@ -97,11 +97,13 @@ public class FXMLInicioController implements Initializable{
                     switchToScene(event, "FXMLPrincipal");
                 }
         }
+        
     }
 
     @FXML
-    private void cancelar(ActionEvent event) {
-        id_cancelar.getScene().getWindow().hide();
+    private void cancelar(ActionEvent event) throws IOException {
+        //id_cancelar.getScene().getWindow().hide();
+        switchToScene(event, "FXMLProblemasLista");
     }   
     
     @FXML

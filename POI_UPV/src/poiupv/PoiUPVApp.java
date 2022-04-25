@@ -24,7 +24,7 @@ public class PoiUPVApp extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLInicio.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
-        stage.setTitle("Iniciar Sesión");
+        stage.setTitle("Inicio");
         stage.setScene(scene);
         FXMLInicioController inicio = loader.getController();
         inicio.initStage(stage);

@@ -65,8 +65,8 @@ public class FXMLPrincipalController implements Initializable {
     }
 
     @FXML
-    private void listaProblemas(ActionEvent event) {
-        //switchToScene(event, "FXMLListaProblemas");
+    private void listaProblemas(ActionEvent event) throws IOException {
+        switchToScene(event, "FXMLProblemasLista");
     }
 
     @FXML
@@ -77,6 +77,11 @@ public class FXMLPrincipalController implements Initializable {
     @FXML
     private void estadisticas(ActionEvent event) {
         //switchToScene(event, "FXMLEstadisticas");
+    }
+
+    @FXML
+    private void handlevolver(ActionEvent event) throws IOException {
+        switchToScene(event, "FXMLInicio");
     }
     
 }
