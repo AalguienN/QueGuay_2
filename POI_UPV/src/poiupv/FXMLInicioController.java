@@ -52,6 +52,7 @@ public class FXMLInicioController implements Initializable{
     private Stage primaryStage;
     private Scene scene;
     
+    
     /**
      * Initializes the controller class.
      */
@@ -59,6 +60,7 @@ public class FXMLInicioController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
         try {
             datos = Navegacion.getSingletonNavegacion();
+            
             /*String nickName = "nickName";
             String email = "email@domain.es";
             String password = "miPassword";

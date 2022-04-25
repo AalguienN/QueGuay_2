@@ -56,7 +56,7 @@ public class FXMLDocumentController implements Initializable {
     private MenuItem pin_info;
     @FXML
     private Label posicion;
-
+    
     @FXML
     void zoomIn(ActionEvent event) {
         //================================================
@@ -124,6 +124,7 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         initData();
+        
         //==========================================================
         // inicializamos el slider y enlazamos con el zoom
         zoom_slider.setMin(0.5);

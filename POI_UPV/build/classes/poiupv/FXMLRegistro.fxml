@@ -17,7 +17,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="450.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.FXMLRegistroController">
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #0685BC;" BorderPane.alignment="CENTER_LEFT">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #0685BC;" BorderPane.alignment="CENTER_LEFT">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Registro">
                <font>
@@ -76,7 +76,7 @@
                      </HBox.margin></Label>
                   <VBox>
                      <children>
-                        <TextField fx:id="id_nombre" alignment="CENTER" minWidth="350.0">
+                        <TextField fx:id="id_nombre" minWidth="350.0" promptText="Nickname">
                            <VBox.margin>
                               <Insets left="10.0" />
                            </VBox.margin></TextField>
@@ -98,7 +98,7 @@
                      </HBox.margin></Label>
                   <VBox>
                      <children>
-                        <TextField fx:id="id_correo" alignment="CENTER" minWidth="350.0" promptText="yourEmail@domain.com">
+                        <TextField fx:id="id_correo" minWidth="350.0" promptText="yourEmail@domain.com">
                            <VBox.margin>
                               <Insets left="10.0" />
                            </VBox.margin></TextField>

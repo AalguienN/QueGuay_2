@@ -19,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -45,6 +46,9 @@ public class FXMLPrincipalController implements Initializable {
     private Scene scene;
     @FXML
     private AnchorPane id_split;
+    @FXML
+    private Label id_salir;
+    
     /**
      * Initializes the controller class.
      */
@@ -92,8 +96,18 @@ public class FXMLPrincipalController implements Initializable {
     }
 
     @FXML
+    private void modificarPerfil(MouseEvent event) {
+        //switchToScene(event, "FXMLModificarPerfil");
+    }
+
+    @FXML
     private void cerrarSesion(MouseEvent event) throws IOException {
         switchToScene(event, "FXMLInicio");
+    }
+
+    @FXML
+    private void salir(MouseEvent event) {
+        id_salir.getScene().getWindow().hide();
     }
 
 
