@@ -88,7 +88,7 @@ public class FXMLPrincipalController implements Initializable {
 
     @FXML
     private void problemasAleatorios(ActionEvent event) throws IOException {
-        switchToScene(event, "FXMLDocument");
+        switchToScene(event, "FXMLProblemaAleatorio");
     }
 
     @FXML
