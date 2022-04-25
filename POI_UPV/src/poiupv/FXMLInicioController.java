@@ -78,7 +78,6 @@ public class FXMLInicioController implements Initializable{
     }
        //CAMBIAR ESCENA: parametros son el evento causante y el nombre del fichero .fxml
     private void switchToScene(ActionEvent event, String name) throws IOException {
-  
         Parent root = FXMLLoader.load(getClass().getResource(name+".fxml"));
         primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

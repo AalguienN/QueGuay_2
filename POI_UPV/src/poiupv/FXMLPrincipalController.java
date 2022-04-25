@@ -81,8 +81,8 @@ public class FXMLPrincipalController implements Initializable {
     }
 
     @FXML
-    private void listaProblemas(ActionEvent event) {
-        //switchToScene(event, "FXMLListaProblemas");
+    private void listaProblemas(ActionEvent event) throws IOException {
+        switchToScene(event, "FXMLProblemasLista");
     }
 
     @FXML
