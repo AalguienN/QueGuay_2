@@ -95,8 +95,8 @@ public class FXMLProblemasListaController implements Initializable {
     }
 
     @FXML
-    private void handleProblemaAleatorio(ActionEvent event) {
-        //hacer un problema aleatorio...
+    private void handleProblemaAleatorio(ActionEvent event) throws IOException {
+        switchToScene(event, "FXMLProblemaAleatorio");
     }
 
     @FXML

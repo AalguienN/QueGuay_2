@@ -41,12 +41,12 @@
                         </AnchorPane>
                         <HBox alignment="BOTTOM_CENTER" prefHeight="5.0" prefWidth="200.0">
                            <children>
-                              <Button mnemonicParsing="false" prefWidth="75.0" text="Menú">
+                              <Button mnemonicParsing="false" onAction="#irAMenu" prefWidth="75.0" text="Menú">
                                  <HBox.margin>
                                     <Insets bottom="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefWidth="120.0" text="Lista de Problemas">
+                              <Button mnemonicParsing="false" onAction="#irAListaProblemas" prefWidth="120.0" text="Lista de Problemas">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="30.0" top="5.0" />
                                  </HBox.margin>

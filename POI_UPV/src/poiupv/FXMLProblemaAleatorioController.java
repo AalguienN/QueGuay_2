@@ -4,6 +4,7 @@
  */
 package poiupv;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,8 +15,12 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -27,6 +32,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Navegacion;
 import poiupv.Poi;
 
 /**
@@ -41,6 +47,11 @@ public class FXMLProblemaAleatorioController implements Initializable {
     private Group zoomGroup;
     @FXML
     private ScrollPane id_scrollPane;
+    
+    private Navegacion datos; //creacion del Map
+    private Stage primaryStage;
+    private Scene scene;
+    
     /**
      * Initializes the controller class.
      */
@@ -91,6 +102,25 @@ public class FXMLProblemaAleatorioController implements Initializable {
         // recuperamos el valor del scroll antes del escalado
         id_scrollPane.setHvalue(scrollH);
         id_scrollPane.setVvalue(scrollV);
+    }
+    
+    private void switchToScene(ActionEvent event, String name) throws IOException {
+  
+        Parent root = FXMLLoader.load(getClass().getResource(name+".fxml"));
+        primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    @FXML
+    private void irAMenu(ActionEvent event) throws IOException {
+        switchToScene(event, "FXMLPrincipal");
+    }
+
+    @FXML
+    private void irAListaProblemas(ActionEvent event) throws IOException {
+        switchToScene(event, "FXMLProblemasLista");
     }
     
     
