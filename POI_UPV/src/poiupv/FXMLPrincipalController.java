@@ -79,6 +79,7 @@ public class FXMLPrincipalController implements Initializable {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    
 
     @FXML
     private void listaProblemas(ActionEvent event) throws IOException {
@@ -91,8 +92,8 @@ public class FXMLPrincipalController implements Initializable {
     }
 
     @FXML
-    private void estadisticas(ActionEvent event) {
-        //switchToScene(event, "FXMLEstadisticas");
+    private void estadisticas(ActionEvent event) throws IOException {
+        switchToScene(event, "FXMLEstadisticas");
     }
 
     @FXML
