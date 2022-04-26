@@ -57,7 +57,6 @@ public class FXMLProblemaAleatorioController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         //==========================================================
         // inicializamos el slider y enlazamos con el zoom
         id_zoomSlider.setMin(0.5);
@@ -73,9 +72,8 @@ public class FXMLProblemaAleatorioController implements Initializable {
         contentGroup.getChildren().add(zoomGroup);
         zoomGroup.getChildren().add(id_scrollPane.getContent());
         id_scrollPane.setContent(contentGroup);
-
     }    
-    
+
     @FXML
     private void zoomIn(MouseEvent event) {
         // el incremento del zoom dependerá de los parametros del 

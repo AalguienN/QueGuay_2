@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -61,9 +62,9 @@ public class FXMLInicioController implements Initializable{
         try {
             datos = Navegacion.getSingletonNavegacion();
             
-            /*String nickName = "nickName";
+            /*String nickName = "a";
             String email = "email@domain.es";
-            String password = "miPassword";
+            String password = "a";
             LocalDate birthdate = LocalDate.now().minusYears(18);
             User result = datos.registerUser(nickName, email, password, birthdate);*/
         } catch (NavegacionDAOException ex) {
@@ -84,6 +85,15 @@ public class FXMLInicioController implements Initializable{
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    
+    private void switchToScene(KeyEvent event, String name) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(name+".fxml"));
+        primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
     
     @FXML
     private void iniciarSesion(ActionEvent event) throws IOException {
@@ -117,6 +127,21 @@ public class FXMLInicioController implements Initializable{
     }
 
     @FXML
-    private void teclaEnter(KeyEvent event) {
+    private void teclaEnter(KeyEvent event) throws IOException{ 
+        if(event.getCode()==ENTER){
+            id_usuarioIncorrecto.visibleProperty().set(false); //siempre que le des a iniciar sesión desaparece el mensaje de error
+            id_contraseñaIncorrecta.visibleProperty().set(false); //siempre que le des a iniciar sesión desaparece el mensaje de error
+            if(!datos.exitsNickName(id_usuario.textProperty().getValueSafe())){ //comprueba si no existe el usuario en la base de datos y muestra el mensaje de error
+                id_usuarioIncorrecto.visibleProperty().set(true); 
+            }else{ // comprueba si la contraseña no coincide con el usuario y muestra el mensaje de error
+                User user = datos.loginUser(id_usuario.textProperty().getValueSafe(),
+                id_contraseña.textProperty().getValueSafe());
+                    if(user == null){
+                        id_contraseñaIncorrecta.visibleProperty().set(true); 
+                    }else{ //si todo está bien, te envía al principal
+                        switchToScene(event, "FXMLPrincipal");
+                    }
+            }
+        }
     }
 }
