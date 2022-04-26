@@ -101,13 +101,14 @@ public class FXMLInicioController implements Initializable{
     }
 
     @FXML
-    private void cancelar(ActionEvent event) {
-        id_cancelar.getScene().getWindow().hide();
+    private void cancelar(ActionEvent event) throws IOException{
+        switchToScene(event, "FXMLEstadisticas");
+        //id_cancelar.getScene().getWindow().hide();
     }   
     
     @FXML
     private void registrase(ActionEvent event) throws IOException {
-        switchToScene(event, "FXMLEstadisticas");
+        switchToScene(event, "FXMLRegistro");
     }
     
     void initStage(Stage stage) {
