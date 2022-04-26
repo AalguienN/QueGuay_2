@@ -63,6 +63,7 @@ public class FXMLProblemasListaController implements Initializable {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         primaryScene = new Scene(root);
         stage.setScene(primaryScene);
+        stage.setResizable(false);
         stage.show();
     }
     
@@ -97,6 +98,8 @@ public class FXMLProblemasListaController implements Initializable {
     @FXML
     private void handleProblemaAleatorio(ActionEvent event) throws IOException {
         switchToScene(event, "FXMLProblemaAleatorio");
+        stage.setResizable(true);
+        
     }
 
     @FXML

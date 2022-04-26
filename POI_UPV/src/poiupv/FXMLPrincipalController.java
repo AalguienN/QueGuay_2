@@ -68,6 +68,7 @@ public class FXMLPrincipalController implements Initializable {
         primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
     
@@ -77,6 +78,7 @@ public class FXMLPrincipalController implements Initializable {
         primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
     
@@ -89,6 +91,7 @@ public class FXMLPrincipalController implements Initializable {
     @FXML
     private void problemasAleatorios(ActionEvent event) throws IOException {
         switchToScene(event, "FXMLProblemaAleatorio");
+        primaryStage.setResizable(true);
     }
 
     @FXML
