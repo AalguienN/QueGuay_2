@@ -109,7 +109,7 @@ public class FXMLInicioController implements Initializable{
                 if(user == null){
                         id_contraseñaIncorrecta.visibleProperty().set(true); 
                 }else{ //si todo está bien, te envía al principal
-                    switchToScene(event, "FXMLPrincipal");
+                    switchToScene(event, "FXMLPrincipal_1   ");
                 }
         }
     }
@@ -141,7 +141,7 @@ public class FXMLInicioController implements Initializable{
                     if(user == null){
                         id_contraseñaIncorrecta.visibleProperty().set(true); 
                     }else{ //si todo está bien, te envía al principal
-                        switchToScene(event, "FXMLPrincipal");
+                        switchToScene(event, "FXMLPrincipal_1");
                     }
             }
         }

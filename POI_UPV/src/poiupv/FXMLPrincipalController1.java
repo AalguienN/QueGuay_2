@@ -32,7 +32,7 @@ import model.Navegacion;
  *
  * @author User
  */
-public class FXMLPrincipalController implements Initializable {
+public class FXMLPrincipalController1 implements Initializable {
 
     @FXML
     private Button id_listaProblemas;
@@ -58,7 +58,7 @@ public class FXMLPrincipalController implements Initializable {
             datos = Navegacion.getSingletonNavegacion();
             
         } catch (NavegacionDAOException ex) {
-            Logger.getLogger(FXMLPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FXMLPrincipalController1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
     
@@ -104,13 +104,21 @@ public class FXMLPrincipalController implements Initializable {
         //switchToScene(event, "FXMLModificarPerfil");
     }
 
-    private void cerrarSesion(MouseEvent event) throws IOException {
-        switchToScene(event, "FXMLInicio");
-    }
 
     @FXML
     private void salir(MouseEvent event) {
         id_salir.getScene().getWindow().hide();
     }
 
+    @FXML
+    private void cerrarSesion(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLRegistro.fxml"));
+        primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Node node = ((Node)event.getSource());
+        node.getScene().getWindow().hide();
+        scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
 }
