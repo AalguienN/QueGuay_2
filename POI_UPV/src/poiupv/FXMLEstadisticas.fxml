@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -37,13 +40,33 @@
                         </Label>
                      </children>
                   </VBox>
+                  <VBox>
+                     <children>
+                        <Label fx:id="id_porcentajeAcierto1" text="En la última semana">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="30.0" right="30.0" />
+                           </VBox.margin>
+                        </Label>
+                        <BarChart fx:id="id_barChar" titleSide="LEFT">
+                          <xAxis>
+                            <CategoryAxis fx:id="id_xAxis" side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis fx:id="id_yAxis" side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
             <HBox prefHeight="165.0" prefWidth="313.0">
                <children>
                   <VBox prefHeight="100.0" prefWidth="283.0">
                      <children>
-                        <CheckBox fx:id="id_checkFecha" mnemonicParsing="false" text="Filtrar por fecha">
+                        <CheckBox fx:id="id_checkFecha" mnemonicParsing="false" onAction="#filtrarFecha" text="Filtrar por fecha">
                            <VBox.margin>
                               <Insets left="10.0" top="10.0" />
                            </VBox.margin>
